@@ -1,0 +1,53 @@
+{
+  "clientId": "Bosch-UNIHACK-Gateway-0",
+  "scanInterval": 30000,
+  "logLevel": 4,
+  "capacity": 10,
+  "sensorTagName": "Bosch-SensorTag",
+
+  "http": {
+    "https": false,
+    "host": "localhost",
+    "port": 3000,
+    "username": "admin",
+    "password": "secretpassword",
+    "timeout": 2000
+  },
+
+  "mqtt": {
+    "host": "localhost",
+    "port": 1883,
+    "username": "admin",
+    "password": "secretpassword"
+  },
+
+  "sensorTag": {
+    "discoveryTimeout": 12000,
+
+    "defaultConfig": {
+      "light": {
+        "enabled": false,
+        "period": 1000
+      },
+      "humidity": {
+        "enabled": true,
+        "period": 500
+      },
+      "pressure": {
+        "enabled": false,
+        "period": 500
+      },
+      "movement": {
+        "enabled": true,
+        "period": 500
+      },
+      "outputs": {
+        "led": {
+          "red": true,
+          "green": true
+        },
+        "buzzer": true
+      }
+    }
+  }
+}

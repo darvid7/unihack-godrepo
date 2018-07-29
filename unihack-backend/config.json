@@ -1,0 +1,20 @@
+{
+  "mqtt": {
+    "host": "localhost",
+    "port": 1883,
+    "websocket": 3001,
+    "username": "admin",
+    "password": "secretpassword"
+  },
+  "api": {
+    "port": 3000,
+    "limits": {
+      "telemetry": 128
+    }
+  },
+  "mongodb": {
+    "host": "localhost",
+    "port": "27017",
+    "database": "unihack-2018"
+  }
+}

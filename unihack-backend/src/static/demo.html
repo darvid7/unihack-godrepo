@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bosch UNIHACK 2018 Backend</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/demo.css" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" href="/images/favicon.png" sizes="16x16">
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="nav-bosch"></div>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <img src="/images/bosch_logo.png" alt="Bosch" /> UNIHACK Docs
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="/">Documentation</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="container">
+      <h1>SensorTag Demo</h1>
+      <div id="demo3d">
+        <p>Orientation mapped to cube's position</p>
+      </div>
+
+      <form id="connect" onsubmit="connect">
+        <input id="deviceId" type="text" placeholder="deviceId">
+        <input id="host" type="text" placeholder="host">
+        <br>
+        <input id="username" type="text" placeholder="username">
+        <input id="password" type="password" placeholder="password">
+        <br>
+        <input type="submit" class="btn btn-primary" value="Connect" />
+      </form>
+
+      <div id="panel" class="hidden">
+        <div class="col-xs-4">
+          <div class="readings">
+            <h4>Stats</h4>
+            <p>STATUS:
+              <span id="status"></span>
+            </p>
+            <p>Battery:
+              <span id="battery"></span>
+            </p>
+          </div>
+
+          <div class="readings">
+            <h4>Accelerometer</h4>
+            <p>x:
+              <span id="a-x"></span>
+            </p>
+            <p>y:
+              <span id="a-y"></span>
+            </p>
+            <p>z:
+              <span id="a-z"></span>
+            </p>
+          </div>
+
+          <div class="readings">
+            <h4>Gyroscope</h4>
+            <p>x:
+              <span id="g-x"></span>
+            </p>
+            <p>y:
+              <span id="g-y"></span>
+            </p>
+            <p>z:
+              <span id="g-z"></span>
+            </p>
+          </div>
+
+          <div class="readings">
+            <h4>Magetometer</h4>
+            <p>x:
+              <span id="m-x"></span>
+            </p>
+            <p>y:
+              <span id="m-y"></span>
+            </p>
+            <p>z:
+              <span id="m-z"></span>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-xs-4">
+          <div class="readings">
+            <h4>Light</h4>
+            <p>Data:
+              <span id="light"></span>
+            </p>
+          </div>
+
+          <div class="readings">
+            <h4>Humidity</h4>
+            <p>Humidity:
+              <span id="humidity"></span>
+            </p>
+            <p>Temperature:
+              <span id="htemp"></span>
+            </p>
+          </div>
+
+          <div class="readings">
+            <h4>Pressure</h4>
+            <p>Pressure:
+              <span id="pressure"></span>
+            </p>
+            <p>Temperature:
+              <span id="ptemp"></span>
+            </p>
+          </div>
+
+          <div class="readings">
+            <h4>Inputs</h4>
+            <p>ButtonL:
+              <span id="b-1">idle</span>
+            </p>
+            <p>ButtonR:
+              <span id="b-2">idle</span>
+            </p>
+            <p>Reed:
+              <span id="reed">idle</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-xs-4">
+          <button class="btn btn-primary" id="updateStatus">Get Status</button>
+          <button class="btn btn-info" id="updateConfig">Get Config</button>
+          <button class="btn btn-success" id="pushConfig">Push Config</button>
+          <textarea id="config">
+          // push config to see
+        </textarea>
+          <button class="btn btn-info" id="toggleGreen">Toggle Green LED</button>
+          <button class="btn btn-info" id="toggleRed">Toggle Red LED</button>
+          <button class="btn btn-info" id="toggleBuzzer">Toggle Buzzer</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/94/three.min.js"></script>
+    <script src="https://unpkg.com/mqtt@2.18.3/dist/mqtt.min.js"></script>
+    <script src="https://cdn.rawgit.com/ZiCog/madgwick.js/master/MadgwickAHRS.js"></script>
+    <!-- <script src="https://cdn.rawgit.com/ZiCog/madgwick.js/master/MahonyAHRS.js"></script> -->
+    <script src="/demo.js"></script>
+</body>
+
+</html>

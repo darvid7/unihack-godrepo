@@ -1,0 +1,13 @@
+#demo3d {
+  text-align: center;
+}
+
+.readings > p > span {
+  color: green;
+  font-weight: bold;
+}
+
+#config {
+  width: 100%;
+  height: 300px;
+}

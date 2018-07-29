@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bosch UNIHACK 2018 Backend</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!--<link rel="stylesheet" href="/styles/bootstrap/bootstrap.min.css" />-->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="/styles/main.css" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/png" href="/images/favicon.png" sizes="16x16">
+  </head>
+  <body>
+    <!-- NAVBAR  -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="nav-bosch"></div>
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <img src="/images/bosch_logo.png" alt="Bosch" />
+            UNIHACK Docs
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#tech-stack">Tech Stack</a></li>
+            <li><a href="#http-api">HTTP API</a></li>
+            <li><a href="#mqtt-api">MQTT API</a></li>
+            <li><a href="#further-info">Further Info</a></li>
+            <li><a href="/demo.html">Demo App</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- Intro -->
+      <div class="intro">
+        <blockquote>
+          <p>These are the API docs for Bosch UNIHACK 2018.</p>
+          <p>Here you will find the answers to life, the universe and everything...</p>
+        </blockquote>
+        <p class="white-text hidden-print"><code><a href="/images/doc.png">GET /answer</a> </code></p>
+      </div>
+
+      <div class="tech-stack row">
+        <div class="col-sm-12">
+          <div id="tech-stack" class="page-anchor"></div>
+          <h1>Tech Stack</h1>
+        </div>
+        <div class="col-sm-8">
+          <p>
+            The following is a description of the systems architecture for the Bosch UNIHACK IoT solution.
+            This solution provides a foundation for data collection and device communication for you to
+            build your own applications on.
+          </p>
+
+          <h2>Backend</h2>
+          <p>
+            The backend is a Node.js application which includes a MQTT broker, the HTTP API and the MQTT API,
+            which is backed by a <a href="https://www.mongodb.com/">MongoDB</a> database for persistence and data storage.
+          </p>
+          <p>The open-source components used are:</p>
+          <ul class="list-inline">
+            <li><a href="#">Source</a></li>
+            <li><a class="icon github" href="https://github.com/mcollina/mosca">mosca</a></li>
+            <li><a class="icon github" href="https://github.com/mqttjs/MQTT.js">mqtt</a></li>
+            <li><a class="icon github" href="https://github.com/expressjs/express">Express.js</a></li>
+            <li><a class="icon github" href="https://github.com/mongodb/node-mongodb-native">mongodb</a></li>
+          </ul>
+
+          <h2>Gateway</h2>
+          <p>
+            The gateways Bosch is providing are Raspberry PI's running a Node.js application which acts as a
+            bridge between the Sensor Tags and the Backend application. This application contains all the
+            logic required to discover and connect to the sensor tags, and then start reading the sensor data
+            retrieved from them and pushing it to the backend for your use.
+            You may host this in any compatible device yourself, check out the repository for more details.
+          </p>
+
+          <p>The open-source components used are:</p>
+          <ul class="list-inline">
+            <li><a href="#">Source</a></li>
+            <li><a class="icon github" href="https://github.com/noble/noble">Bluetooth library</a></li>
+            <li><a class="icon github" href="https://github.com/mqttjs/MQTT.js">mqtt</a></li>
+          </ul>
+
+          <h2>Device</h2>
+          <p>
+            The devices are TI Sensor Tags which provide a wide range of sensors. The sensor tags are using a
+            slightly modified version of TI's open-source device firmware, however the GATT services are still
+            the same.
+         </p>
+         <ul class="list-inline">
+           <li><a class="icon pdf" href="/TI_CC2650STK-Getting_Started.pdf">Guide</a></li>
+         </ul>
+         <h3>Sensors</h3>
+         <p>Each sensor group is a physical sensor component on the sensortag.
+           Each sensor group can have its telemetery interval set and disabled/enabled via the config endpoint.</p>
+         <p><strong>Sensor Group:</strong> Movement</p>
+         <p>Polling Interval: 100ms - 2.55s</p>
+         <ul>
+           <li>3 axis Gyro [°/s]</li>
+           <li>3 axis Accelerometer [g]</li>
+           <li>3 axis Magnetometer [μT]</li>
+         </ul>
+         <p><strong>Sensor Group:</strong> Light</p>
+         <p>Polling Interval: 300ms - 2.55s</p>
+         <ul>
+           <li>Light Intensity [lx]</li>
+         </ul>
+         <p><strong>Sensor Group:</strong> Humidity</p>
+         <p>Polling Interval: 100ms - 2.55s</p>
+         <ul>
+           <li>Temperature [°C]</li>
+           <li>Humidity [%]</li>
+         </ul>
+         <p><strong>Sensor Group:</strong> Pressure</p>
+         <p>Polling Interval: 100ms - 2.55s</p>
+         <ul>
+          <li>Temperature [°C]</li>
+          <li>Pressure [hPa]</li>
+         </ul>
+         <p><strong>Sensor Group:</strong> Inputs</p>
+         Telemetry pushed on button activation
+         <ul>
+          <li>Button - Normal and Power</li>
+          <li>Magnetic Reed Switch</li>
+         </ul>
+         <h3>Outputs</h3>
+         <p>The sensor tag includes 2 leds and a buzzer for outputs. These can be modified via the device configuration.</p>
+        </div>
+        <div class="col-sm-4">
+          <pre data-display="text-snippet" data-snippet="tech-stack"></pre>
+          <caption><abbr title="in all its Ascii Art Glory">System architecture diagram</abbr></caption>
+        </div>
+      </div>
+
+      <br>
+      <hr>
+      <br>
+
+      <!-- HTTP API -->
+      <div class="http-api">
+        <div id="http-api" class="page-anchor"></div>
+        <h2>HTTP API</h2>
+        <p>The HTTP API allows for retrieval of sensor data and configuration of devices.</p>
+        <p><strong>The last 10,000 pushed sensor datapoints are stored per device</strong></p>
+        <h3>API Authentication</h3>
+        <p>
+          All device endpoints require authentication with Basic Auth.
+          The username is the device id, which will be the MAC address of the sensor tag,
+          and the default password will be <code>UNIHACK_BoschXX</code>, where <code>XX</code>
+          are the last two characters of the device id.
+        </p>
+        <div class="alert alert-info" role="alert">
+          <strong>NOTE:</strong> It is highly recommended to change the default password for your device.
+        </div>
+
+        <div class="api-endpoint">
+          <h3>Endpoint Summary</h3>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>HTTP Endpoint</th>
+                  <th>Params/Body</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>GET /devices</code></td>
+                  <td>
+                    <p>Query Params:</p>
+                    <ul class="list">
+                      <li><code>page</code> - default: 0</li>
+                      <li><code>limit</code> - default: 10</li>
+                    </ul>
+                  </td>
+                  <td>Retrieve all devices, their configuration and status.</td>
+                </tr>
+                <tr>
+                  <td><code>GET /devices/:deviceId</code></td>
+                  <td></td>
+                  <td>Retrieve a single device with given deviceId.</td>
+                </tr>
+                <tr>
+                  <td><code>GET /devices/:deviceId/telemetry</code></td>
+                  <td>
+                    <p>Query Params:</p>
+                    <ul class="list">
+                      <li><code>limit</code> - default: 20, max: 128</li>
+                      <li><code>sensor</code></li>
+                    </ul>
+                  </td>
+                  <td>Retrieve a given number of sensor datapoints for a device.<br>
+                  This endpoint is recommended for latest data retrieval.</td>
+                </tr>
+
+                <tr>
+                  <td><code>GET /devices/:deviceId/telemetry/historic</code></td>
+                  <td>
+                    <p>Query Params:</p>
+                    <ul class="list">
+                      <li><code>pageSize</code> - default: 20, max: 128</li>
+                      <li><code>page</code> - default: 0</li>
+                      <li><code>sensor</code></li>
+                      <li><code>startTime</code> - default: 0, inclusive</li>
+                      <li><code>endTime</code> - default: query time, inclusive</li>
+                    </ul>
+                  </td>
+                  <td>Retrieve paginated sensor datapoints for a device.<br>
+                  This endpoint is recommended for historic data retrieval.</td>
+                </tr>
+
+                <tr>
+                  <td><code>PUT /devices/:deviceId/config</code></td>
+                  <td>
+                    <p>Body:</p>
+                    <code>{ /* config payload */ }</code>
+                  </td>
+                  <td>Update the device configuration.</td>
+                </tr>
+                <tr>
+                  <td><code>POST /devices/:deviceId/password</code></td>
+                  <td>
+                    <p>Body:</p>
+                    <code>{"password": "newPassword"}</code>
+                  </td>
+                  <td>Update device password</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="api-endpoint">
+          <h3><code>GET /devices</code></h3>
+          <p>Retrieve all devices</p>
+          <p>Result pagination is available using page and limit queries.</p>
+          <ul class="list">
+            <li><code>page</code> - default: 1</li>
+            <li><code>limit</code> - default: 10</li>
+          </ul>
+          <h4>
+            <a class="btn btn-secondary" role="button" data-toggle="collapse" href="#getDevicesExample" aria-expanded="false" aria-controls="collapseExample">
+              Example Response Body<span class="caret"></span>
+            </a>
+          </h4>
+          <div class="collapse" id="getDevicesExample">
+            <pre data-display="code-snippet" data-snippet="get_devices"></pre>
+          </div>
+          <h4>Example requests</h4>
+          <p><code>GET /devices</code> - Get first 10 devices</p>
+          <p><code>GET /devices?limit=20</code> - Get first 20 devices</p>
+          <p><code>GET /devices?page=2&limit=5</code> - Get second page of 5 devices.</p>
+        </div>
+
+        <div class="api-endpoint">
+          <h3><code>GET /devices/:deviceId</code></h3>
+          <p>Get a single device's configuration and status details.</p>
+          <h4>
+            <a class="btn btn-secondary" role="button" data-toggle="collapse" href="#getDeviceExample" aria-expanded="false" aria-controls="collapseExample">
+              Example Response Body<span class="caret"></span>
+            </a>
+          </h4>
+          <div class="collapse" id="getDeviceExample">
+            <pre data-display="code-snippet" data-snippet="get_device"></pre>
+          </div>
+          <h4>Example requests</h4>
+          <p><code>GET /devices/00123456789a</code> - Get device with id 00123456789a</p>
+        </div>
+
+        <div class="api-endpoint">
+          <h3><code>GET /devices/:deviceId/telemetry</code></h3>
+          <p>Retrieve pushed data from device with given device id.</p>
+          <p>Limit query parameter sets how many datapoints to be retrieved.</p>
+          <ul class="list">
+            <li><code>limit</code> - default: 20, max 128</li>
+            <li><code>sensor</code> - limit results to given group of sensors</li>
+          </ul>
+          <h4>
+            <a class="btn btn-secondary" role="button" data-toggle="collapse" href="#getDeviceTelemetryExample" aria-expanded="false" aria-controls="collapseExample">
+              Example Response Body<span class="caret"></span>
+            </a>
+          </h4>
+          <div class="collapse" id="getDeviceTelemetryExample">
+            <pre data-display="code-snippet" data-snippet="get_device_telemetry"></pre>
+          </div>
+          <p>Latest datapoints only can be requested with limit query string: <code>GET /devices/:deviceId/telemetry?limit=:value</code></p>
+          <p>This is recommened to be used for retrieval of latest datapoints.</p>
+          <h4>Example requests</h4>
+          <p><code>GET /devices/mydevice/telemetry</code> - Get all stored datapoints for "mydevice".</p>
+          <p><code>GET /devices/mydevice/telemetry?limit=5</code> - Get 5 latest datapoints for "mydevice".</p>
+          <p><code>GET /devices/mydevice/telemetry?limit=10&sensor=mmu</code> - Get 5 latest datapoints with sensor "mmu" for "mydevice".</p>
+        </div>
+
+        <div class="api-endpoint">
+          <h3><code>GET /devices/:deviceId/telemetry/historic</code></h3>
+          <p>Retrieve pushed data from device with given device id.</p>
+          <p>First query the data according to the set start and end time.
+          Then, split up the data into pages and serve the appropriate page to the user.</p>
+          <p>This is recommened to be used to retrieve historic records of data over a period of time.</p>
+          <ul class="list">
+            <li><code>pageSize</code> - default: 20, max: 128</li>
+            <li><code>page</code> - default: 0</li>
+            <li><code>sensor</code></li>
+            <li><code>startTime</code> - default: 0, inclusive</li>
+            <li><code>endTime</code> - default: query time, inclusive</li>
+          </ul>
+          <h4>
+            <a class="btn btn-secondary" role="button" data-toggle="collapse" href="#getDeviceTelemetryHistoricExample" aria-expanded="false" aria-controls="collapseExample">
+              Example Response Body<span class="caret"></span>
+            </a>
+          </h4>
+          <div class="collapse" id="getDeviceTelemetryHistoricExample">
+            <pre data-display="code-snippet" data-snippet="get_device_telemetry_historic"></pre>
+          </div>
+        </div>
+
+        <div class="api-endpoint">
+          <h3><code>PUT /devices/:deviceId/config</code></h3>
+          <p>Update device configuration</p>
+          <p>Note: This endpoint passes the data straight back to the device and responds without waiting for a reply.
+            This means that to check if the config update is successful, you should read back config shortly after setting it</p>
+          <p>Keep in mind that what you push is incremental (diffs the changes instead of hard-setting it).</p>
+          <p><strong>Request Body:</strong></p>
+          <pre data-display="code-snippet" data-snippet="config_update_body"></pre>
+          <p>
+            <strong>Response:</strong>
+            <ul class="list">
+              <li><b>204</b> - Request was Successful</li>
+              <li><b>400</b> - Request is missing body</li>
+            </ul>
+        </div>
+
+        <div class="api-endpoint">
+          <h3><code>POST /devices/:deviceId/password</code></h3>
+          <p>Update device password</p>
+          <p>Default device password: <code>UNIHACK_BoschXX</code> where <code>XX</code> is last two characters of device id</p>
+          <div class="alert alert-info" role="alert">
+            <strong>NOTE:</strong> It is highly recommended to change the default password for your device.
+          </div>
+          <p><strong>Request Body:</strong></p>
+          <pre>{"password": "newPassword"}</pre>
+          <p>
+            <strong>Response:</strong>
+            <ul class="list">
+              <li><b>204</b> - Request was Successful</li>
+              <li><b>400</b> - Request is missing password property</li>
+            </ul>
+        </div>
+
+      </div>
+
+      <br>
+      <hr>
+
+      <!-- MQTT API -->
+      <div class="mqtt-api">
+        <div id="mqtt-api" class="page-anchor"></div>
+        <h2>MQTT API</h2>
+        <p>
+          Devices can push data to backend via the MQTT Broker.
+          This data is then stored on the server for retreival by your apps via the HTTP API.
+        </p>
+        <p>
+          Students are welcome, if they prefer to use MQTT directly, and bypass the use of the HTTP API.
+          This means you are able to directly subscribe to telemetry, config and status updates from the device,
+          without the need to periodically query the HTTP API. This is highly recommended for close-to-real-time applications.
+        </p>
+        <p>
+          MQTT sever is hosted at <b>bosch.unihack.net:1883</b>
+          Please keep in mind that to connect to MQTT sever via websocket, you need to connect to <b>ws://bosch.unihack.net/mqtt</b>
+        </p>
+        <p>
+          Additionally, you can directly request status or config updates, and push config updates back to the
+          device via the <code>commands</code> topic.
+        </p>
+        <h3>API Authentication</h3>
+        <p>
+          Like the HTTP API, the MQTT API requires authentication.
+          To authenticate for the MQTT API, you use the same username and password combination as with the
+          HTTP API.
+        </p>
+        <p><strong>NOTE:</strong> The default password can only be changed via the HTTP API</p>
+
+        <div class="api-endpoint">
+          <h3>Endpoint Summary</h3>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Topic</th>
+                  <th>Publishers>
+                  <th>Subscribers</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>telemetry/:deviceId/:sensor</code></td>
+                  <td>Device</td>
+                  <td>Users, Backend</td>
+                  <td>This is where all sensor data is pushed to the backend. This data is available via the HTTP API</td>
+                </tr>
+                <tr>
+                  <td><code>status/:deviceId</code></td>
+                  <td>Device</td>
+                  <td>Users, Backend</td>
+                  <td>This is where the gateway will push the status of the connected devices.</td>
+                </tr>
+                <tr>
+                  <td><code>configuration/:deviceId</code></td>
+                  <td>Device</td>
+                  <td>Users, Backend</td>
+                  <td>Devices push their configuration data via this topic. Configuration data is intended to be changed by users</td>
+                </tr>
+                <tr>
+                  <td><code>commands/:deviceId</code></td>
+                  <td>Backend, Users</td>
+                  <td>Device</td>
+                  <td>Messages sent to this topic are read by the devices to execute the sent command</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="api-endpoint">
+          <h3>Sensor Data</h3>
+          <p>Devices push sensor data to <code>telemetry/:deviceId/:sensor</code> topic.</p>
+          <p>Sensor data payload requires JSON structure, with any data:</p>
+          <pre data-display="code-snippet" data-snippet="mqtt_payload"></pre>
+          <p><strong>Required:</strong> <code>timestamp</code> property is required to be present in payload</p>
+        </div>
+
+        <div class="api-endpoint">
+          <h3>Device Status</h3>
+          <p>The device status can be pushed to the backend by devices to be read by end users via the HTTP API.</p>
+
+          <div class="api-endpoint">
+            <h4>Push Status</h4>
+            <p>The device should push status updates to the <code>status/:deviceId</code> topic. This must be a JSON data structure.</p>
+            <p>An example payload is as follows:</p>
+            <pre data-display="code-snippet" data-snippet="mqtt_status_payload"></pre>
+          </div>
+          <div class="api-endpoint">
+            <h4>Request Status Push</h4>
+            <p>The device should respond to the <code>pushStatus</code> command by pushing its current status to the backend.</p>
+          </div>
+        </div>
+
+        <div class="api-endpoint">
+          <h3>Device Configuration</h3>
+          <p>The backend can read and set configuration options for the devices. </p>
+
+          <div class="api-endpoint">
+            <h4>Push Configuration</h4>
+            <p>The device should publish its configuration options to the <code>configuration</code> topic.</p>
+            <p>This should be done upon connection to the server, and when the <code>updateConfig</code> command is recieved.</p>
+            <p>Keep in mind that what you push is incremental (diffs the changes instead of hard-setting it).</p>
+            <p>The config payload should be as follows:</p>
+            <pre data-display="code-snippet" data-snippet="mqtt_updateConfig"></pre>
+          </div>
+
+          <div class="api-endpoint">
+            <h4>Update Configuration</h4>
+            <p>Updating the configuration is done via the <code>command</code> topic.</p>
+            <p>After configuration update, the device should push updates back to the server.</p>
+          </div>
+
+          <div class="api-endpoint">
+            <h4>Request Config Push</h4>
+            <p>The device should respond to the <code>pushConfig</code> command by pushing its current configuration to the backend.</p>
+          </div>
+        </div>
+
+        <div class="api-endpoint">
+          <h3>Device Commands</h3>
+          <p>Users can send commands to the device to the <code>commands/:deviceId</code> topic.</p>
+          <p>An example command payload:</p>
+          <pre data-display="code-snippet" data-snippet="mqtt_command_payload"></pre>
+          <p>The <code>body</code> property is only required for the <code>updateConfig</code> command.</p>
+          <h4>Commands</h4>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Command</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>pushConfig</code></td>
+                  <td>Request the an update for the device config</td>
+                </tr>
+                <tr>
+                  <td><code>pushStatus</code></td>
+                  <td>Request an update for the device status</td>
+                </tr>
+                <tr>
+                  <td><code>updateConfig</code></td>
+                  <td>Push configuration update to device.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <hr>
+
+      <div class="further-info">
+        <div id="further-info" class="page-anchor"></div>
+        <h1>Further Information</h1>
+        <h2>Latency Improvements</h2>
+
+        <div class="table-responsive">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Easy (REST ~500-1500ms)</th>
+              <th>Fast (REST ~300-500ms)</th>
+            </tr>
+
+            <tr>
+              <th>REST</th>
+              <td>https://bosch.unihack.net OR https://unihack.bosch.com.au</td>
+              <td>http://sgpclb3000093.lbaas.sg1.bosch-iot-cloud.com</td>
+            </tr>
+
+            <tr>
+              <th>MQTT</th>
+              <td>bosch.unihack.net:1883 or unihack.bosch.com.au:1883</td>
+              <td>sgpclb3000092.lbaas.sg1.bosch-iot-cloud.com:8883</td>
+            </tr>
+
+            <tr>
+              <th>MQTT (WebSocket)</th>
+              <td>bosch.unihack.net/mqtt or unihack.bosch.com.au/mqtt</td>
+              <td>sgpclb3000093.lbaas.sg1.bosch-iot-cloud.com:443</td>
+            </tr>
+
+          </thead>
+        </table>
+        </div>
+
+        <p>tldr; follow the table above. If you are curious why, talk to Max. If you want the best latency (ie. almost none) - host the apps yourself! Please talk to Max regarding this and he will help.</p>
+
+        <h2>Other</h2>
+        <p>Feel free to contact Max - he is present throughout the entire hackathon.</p>
+        <p>Max will be able to provide tips and solutions regarding performance & latency of the API.</p>
+        <p>You can find him walking around or at the Bosch table. You can also send him a message on UNIHACK Slack chat.</p>
+      </div>
+    </div><!-- End .container -->
+
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div><b>Developed by</b></div>
+            <div>CC/ENG-3, Bosch Australia</div>
+            <div>v1.3.0-SNAPSHOT</div>
+          </div>
+          <div class="col-md-4">
+            <div><b>Built with</b></div>
+            <ul class="list-inline">
+              <li><a href="https://www.npmjs.com/package/mosca">Mosca</a></li>
+              <li><a href="https://expressjs.com/">Express.js</a></li>
+              <li><a href="https://www.npmjs.com/package/mqtt">mqtt</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <div><b>Source Code</b></div>
+            <div><a href="www.github.com">Github</a></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-muted">
+              &copy; Bosch Australia, 2018
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+    </footer>
+
+    <!-- <script src="/scripts/vendor/jquery-3.3.1.min.js"></script> -->
+    <!--<script  src="/scripts/vendor/bootstrap.min.js"></script>-->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"></script>
+    <script src="/main.js"></script>
+  </body>
+</html>

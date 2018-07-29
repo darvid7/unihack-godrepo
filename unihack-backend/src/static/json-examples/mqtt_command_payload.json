@@ -1,0 +1,6 @@
+{
+  "command": "updateConfig",
+  "body": {
+    "value": "new config value"
+  }
+}

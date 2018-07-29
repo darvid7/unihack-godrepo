@@ -1,0 +1,82 @@
+{
+    "deviceId": "mqttjs_df9a1",
+    "searchConfig": {
+        "query": {
+            "timestamp": {
+                "$gte": 1531205500000,
+                "$lte": 1531206688422,
+                "$lt": 1531205541028
+            },
+            "sensor": "humidity"
+        },
+        "pageSize": 5,
+        "page": 2
+    },
+    "result": [
+        {
+            "_id": "5b44579f89ead304b21b047c",
+            "temperature": {
+                "raw": 26064,
+                "celcius": 25.621337890625
+            },
+            "humidity": {
+                "raw": 27100,
+                "rh": 41.351318359375
+            },
+            "timestamp": 1531205535508,
+            "sensor": "humidity"
+        },
+        {
+            "_id": "5b44579f89ead304b21b0478",
+            "temperature": {
+                "raw": 26064,
+                "celcius": 25.621337890625
+            },
+            "humidity": {
+                "raw": 27100,
+                "rh": 41.351318359375
+            },
+            "timestamp": 1531205535013,
+            "sensor": "humidity"
+        },
+        {
+            "_id": "5b44579e89ead304b21b0476",
+            "temperature": {
+                "raw": 26064,
+                "celcius": 25.621337890625
+            },
+            "humidity": {
+                "raw": 27100,
+                "rh": 41.351318359375
+            },
+            "timestamp": 1531205534518,
+            "sensor": "humidity"
+        },
+        {
+            "_id": "5b44579e89ead304b21b0472",
+            "temperature": {
+                "raw": 26060,
+                "celcius": 25.61126708984375
+            },
+            "humidity": {
+                "raw": 27036,
+                "rh": 41.253662109375
+            },
+            "timestamp": 1531205534008,
+            "sensor": "humidity"
+        },
+        {
+            "_id": "5b44579d89ead304b21b0470",
+            "temperature": {
+                "raw": 26052,
+                "celcius": 25.59112548828125
+            },
+            "humidity": {
+                "raw": 27036,
+                "rh": 41.253662109375
+            },
+            "timestamp": 1531205533513,
+            "sensor": "humidity"
+        }
+    ]
+}

@@ -1,0 +1,119 @@
+/************************************
+* GENERAL STYLES
+************************************/
+@font-face {
+  font-family: "Bosch";
+  src: url("/fonts/boschsans_regular.eot");
+  src: local('☺'),
+       url('/fonts/boschsans_regular.woff') format('woff'),
+       url('/fonts/boschsans_regular.ttf') format('truetype'),
+       url('/fonts/boschsans_regular.svg#webfontg8dbVmxj') format('svg');
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Bosch";
+  src: url("/fonts/boschsans_bold.eot");
+  src: local('☺'),
+       url('/fonts/boschsans_bold.woff') format('woff'),
+       url('/fonts/boschsans_bold.ttf') format('truetype'),
+       url('/fonts/boschsans_bold.svg#webfontg8dbVmxj') format('svg');
+  font-weight: bold;
+}
+
+body {
+  padding-top: 70px;
+  overflow-x: hidden;
+  font-family: "Bosch", "Helvetica", sans-serif;
+}
+pre { color: black; }
+
+code { color: #005691; }
+
+h1, h2, h3, h4, h5, h3 code
+{ color: #008ecf; }
+
+.page-anchor {
+  display: block;
+  position: relative;
+  top: -130px;
+  visibility: hidden;
+  vertical-align: top;
+}
+
+.white-text a, .white-text code {
+  color: white !important;
+  background-color: white;
+  font-size: 140%;
+}
+
+/************************************
+* NAV STYLES
+************************************/
+.navbar-default {
+  background-color: white;
+}
+
+.navbar-default .navbar-brand {
+  color: #008ecf;
+}
+
+.navbar::before {
+    width: 100%;
+    height: 16px;
+    content: '';
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url("/images/rainbow.svg");
+}
+
+.navbar-brand img {
+  height: 30px;
+  display: inline-block;
+  margin-right: 20px;
+  margin-top: -5px;
+}
+
+/************************************
+* CONTENT STYLES
+************************************/
+
+.intro {
+  margin-top: 75px;
+  margin-bottom: 50px;
+}
+
+.mqtt-api { margin-top: 75px; }
+.api-endpoint { margin-top: 40px; }
+
+/************************************
+* FOOTER STYLES
+************************************/
+footer {
+  min-height: 100px;
+  padding-top: 50px;
+  margin-top: 75px;
+  background-color: #f8f8f8;
+  border: solid 1px #e7e7e7;
+}
+
+.list-inline > li > a.icon.github::before{
+  content: '';
+  background: url("/images/github.png");
+  background-size: cover;
+}
+
+.list-inline > li > a.icon.pdf::before{
+  content: '';
+  background: url("/images/pdf.svg");
+}
+
+.list-inline > li > a.icon::before{
+  top: 2px;
+  position: relative;
+  margin-right: 3px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-size: cover;
+}

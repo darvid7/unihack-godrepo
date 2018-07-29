@@ -1,0 +1,24 @@
+{
+  "light": {
+    "enabled": true,
+    "period": 1000
+  },
+  "humidity": {
+    "enabled": true,
+    "period": 500
+  },
+  "pressure": {
+    "enabled": true
+  },
+  "movement": {
+    "enabled": true,
+    "period": 500
+  },
+  "outputs": {
+    "led": {
+      "red": true,
+      "green": true
+    },
+    "buzzer": false
+  }
+}

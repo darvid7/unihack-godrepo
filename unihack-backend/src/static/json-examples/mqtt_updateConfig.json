@@ -1,0 +1,6 @@
+{
+  "accelerometerEnable": true,
+  "ledRed": 1,
+  "ledGreen": 0,
+  "someOtherConfigOption": "New Value"
+}
