@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "521158343926",
+    "firebase_url": "https://mediocre-unihack.firebaseio.com",
+    "project_id": "mediocre-unihack",
+    "storage_bucket": "mediocre-unihack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521158343926:android:a226910dbd84e62c",
+        "android_client_info": {
+          "package_name": "dlei.com.unihack2018meditracesensor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521158343926-89g2qvnap3pn528klt19h72hrij03asn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dlei.com.unihack2018meditracesensor",
+            "certificate_hash": "0b22bd80081d2855bd162a5d718bb000c5386bab"
+          }
+        },
+        {
+          "client_id": "521158343926-1robtnega4tfkeaenalh6drro6s1sgfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFx97nuf5KU4JDqRUAMYTWsgCwYDzvTmk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521158343926-1robtnega4tfkeaenalh6drro6s1sgfm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
